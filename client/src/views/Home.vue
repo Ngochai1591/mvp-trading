@@ -4,7 +4,7 @@
       <div class="hero-body has-text-centered">
         <!-- <p class="title mb-6">Welcome to MVP</p> -->
         <img src="https://lh5.googleusercontent.com/Ja0yCw81LMzaCw8JcfKt6i8QnEYr0r9y1ZwSjr3kwHGIvhpVSia-usYXEB4B0NpwxsXAoZmyaEdFjLO3evyH1DyfTebRNoyeTwYL2K_OFNbCcqFO398SzYbiPA_kFJ3VcLit2G4QzJ4"/>                
-        <p class="subtitle">HELLO WORLD best E-sport NFT trading on Binance Smart Chain</p>
+        <p class="subtitle"> best E-sport NFT trading on Binance Smart Chain</p>
       </div>
     </section>
 
@@ -79,7 +79,8 @@ const MIN_ABI = [
         "type":"function"
       }
   ];
-const NFT_SMARTCONTRACT_ADDRESS = '0x3CBCfEB7b8d93c501bcB155712FeecC8a45c1221'
+// const NFT_SMARTCONTRACT_ADDRESS = '0x3CBCfEB7b8d93c501bcB155712FeecC8a45c1221'
+const NFT_SMARTCONTRACT_ADDRESS = '0x22D8F94D887aEf0d732159F20e440850AEc9Bf53'
 
 export default {
   name: "Home",
@@ -106,6 +107,7 @@ export default {
       Contract.setProvider(provider);
       const contract = new Contract(minABI, contract_id);
       const owner = await contract.methods.tokenURI(tokenId).call();
+      console.log("OWNER", owner)
       const data_callback =  await  axios
         .get(owner)
         .then(({data}) =>{

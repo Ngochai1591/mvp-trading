@@ -61,7 +61,7 @@
     <section class="section">
       <router-view />
     </section>
-    <div class="create-product" @click="moveToCreateProduct()">
+    <div :class="showCreateButton()" @click="moveToCreateProduct()">
       <div class="create">
         <div class="block1">
         <i class="fas fa-plus-circle fa-3x"></i>
@@ -81,21 +81,22 @@
 import { mapState, mapGetters} from "vuex";
 import router from "./router";
 
+
 export default {
   data() {
     return {
       showMobileMenu: false
     };
   },
-  created() {
-  },
+ 
   computed: {
     ...mapGetters("authentication", [
-      'isConnected'
+      'isConnected',
     ]),
     ...mapState("loading", ["isLoading"]),
     ...mapState("authentication", [
-      "walletID"
+      "walletID",
+      'walletError'
     ]),
   },
   methods: {
@@ -105,9 +106,17 @@ export default {
     getWalletID(){
       console.log("WALLET_STATUS", this.isConnected)
       if(this.isConnected){
-        return this.walletID
+        // return this.walletID
+        return "Wallet is connected"
       }
       return "Connect to wallet"
+    },
+    showCreateButton(){
+      console.log(router.currentRoute.fullPath)
+      if(router.currentRoute.fullPath === "/createProduct"){
+        return "is-hidden"
+      }
+      return "create-product"
     }
   }
 };
@@ -180,4 +189,8 @@ export default {
 .create-product:hover{
       cursor: pointer;
     }
+
+.is-hidden{
+  display: none;
+}
 </style>
