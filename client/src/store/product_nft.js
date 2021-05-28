@@ -45,8 +45,6 @@ const MIN_ABI = [
       }
   ];
 const NFT_SMARTCONTRACT_ADDRESS = '0x3CBCfEB7b8d93c501bcB155712FeecC8a45c1221'
-const CHUONG_PRIVATE_KEY = '26d3ee767995bd347584278bb88a9b8fd5dc7a58cc239b36db28e168ccb72292'
-const HOAN_PRIVATE_KEY = 'b8dbba400a7620fd72675763ce8423d9c966786fb9fddbe0cd81982cdd63a694'
 // const metadata_link = 'https://ipfs.io/ipfs/Qmd9MCGtdVz2miNumBHDbvj8bigSgTwnr4SbyH6DNnpWdt?filename=0-PUG.json';
 
 
