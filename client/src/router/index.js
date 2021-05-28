@@ -1,10 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
-import Product from '../views/Product.vue'
-import Category from '../views/Category.vue'
-import Search from '../views/Search.vue'
-import Cart from '../views/Cart.vue'
 import TestMetaMask from '../views/TestMetaMask.vue'
 import CreateProduct from '../views/CreateProduct.vue'
 import Wallet from '../views/Wallet.vue';
@@ -27,26 +23,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
-  {
-    path: '/products/:category_slug/:product_slug/',
-    name: 'Product',
-    component: Product
-  },
-  {
-    path: '/category/:category_slug/',
-    name: 'Category',
-    component: Category
-  },
-  {
-    path: '/search/result/',
-    name: "Search",
-    component: Search
-  },
-  {
-    path: '/cart/',
-    name: 'Cart',
-    component: Cart
-  },
+
   {
     path: '/testMetaMask',
     name: "testMetaMask",

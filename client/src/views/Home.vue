@@ -4,7 +4,7 @@
       <div class="hero-body has-text-centered">
         <!-- <p class="title mb-6">Welcome to MVP</p> -->
         <img src="https://lh5.googleusercontent.com/Ja0yCw81LMzaCw8JcfKt6i8QnEYr0r9y1ZwSjr3kwHGIvhpVSia-usYXEB4B0NpwxsXAoZmyaEdFjLO3evyH1DyfTebRNoyeTwYL2K_OFNbCcqFO398SzYbiPA_kFJ3VcLit2G4QzJ4"/>                
-        <p class="subtitle">best E-sport NFT trading on Binance Smart Chain</p>
+        <p class="subtitle">HELLO WORLD best E-sport NFT trading on Binance Smart Chain</p>
       </div>
     </section>
 
@@ -13,31 +13,7 @@
         <h2 class="is-size-3 has-text-centered">Latest Products</h2>
       </div>
 
-      <!-- <div
-        class="column is-3"
-        v-for="product in latestProducts"
-        v-bind:key="product.id"
-      >
-        <div class="box">
-          <figure class="image mb-4">
-            <img v-bind:src="product.get_thumbnail" />
-          </figure>
-          <h3 class="is-size-4">
-            {{ product.name }}
-          </h3>
-          <p class="is-size-6 has-text-grey">${{ product.price }}</p>
-        
-          <router-link 
-            :to="product.get_absolute_url"
-            class="button is-dark mt-4">
-              View details
-          </router-link>
-        </div>
-      </div> -->
-    <!-- <ProductBox 
-        v-for="product in products"
-        :key="product.id"
-        :product="product"/> -->
+    
       <ProductNFTBox 
         v-for="product in products"
         :key="product.tokenId"
@@ -50,7 +26,6 @@
 <script>
 // @ is an alias to /src
 import { mapState, mapActions, mapMutations } from "vuex";
-import ProductBox from '@/components/ProductBox.vue'
 import ProductNFTBox from '@/components/ProductNFTBox.vue';
 import axios from 'axios'
 
@@ -58,8 +33,8 @@ import axios from 'axios'
 const Contract = require("web3-eth-contract");
 
 const PROVIDER = "https://data-seed-prebsc-2-s2.binance.org:8545"
-const BSC_TESTNET_ADDRESS = 'https://data-seed-prebsc-1-s1.binance.org:8545'
-const HOAN_ADDRESS = '0xc24BC060a2305E35641c4A67F0Ee4aD932b2E083'
+// const BSC_TESTNET_ADDRESS = 'https://data-seed-prebsc-1-s1.binance.org:8545'
+// const HOAN_ADDRESS = '0xc24BC060a2305E35641c4A67F0Ee4aD932b2E083'
 const MIN_ABI = [
     {
       "constant":true,
@@ -109,27 +84,18 @@ const NFT_SMARTCONTRACT_ADDRESS = '0x3CBCfEB7b8d93c501bcB155712FeecC8a45c1221'
 export default {
   name: "Home",
   components:{
-    ProductBox,
     ProductNFTBox
     },
   async mounted(){
     document.title = "MVP | Top E-sport NFT trading"
-    // await this.getLatestProducts()
     await this.fetchProductNFT()
   },
   computed:{
-    ...mapState('product', [
-      'latestProducts'
-    ]),
     ...mapState('product_nft', [
       'products'
     ])
   },
   methods: {
-    ...mapActions('product', [
-        'getLatestProducts'
-    ]),
-
     ...mapActions('product_nft', [
     ]),
 
@@ -140,11 +106,9 @@ export default {
       Contract.setProvider(provider);
       const contract = new Contract(minABI, contract_id);
       const owner = await contract.methods.tokenURI(tokenId).call();
-      // console.log("OWNER", owner);
       const data_callback =  await  axios
         .get(owner)
         .then(({data}) =>{
-          // console.log(data)
           return data
         })
         .catch(err=>{
@@ -159,7 +123,6 @@ export default {
       Contract.setProvider(provider);
       const contract = new Contract(minABI, contract_id);
       const URI_LINK = await contract.methods.totalSupply().call();
-      // console.log("COUNTING", URI_LINK)
       return URI_LINK
     },
     async findOwner(token_id, provider, minABI, contract_id){

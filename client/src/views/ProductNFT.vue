@@ -198,12 +198,7 @@ export default {
   },
 
   mounted() {
-    // const category_slug = this.$route.params.category_slug;
-    // const product_slug = this.$route.params.product_slug;
-    // this.getProduct({ category_slug, product_slug });
     const default_string = " MVP| Top E-sport NFT trading";
-    // const title_string = product_slug.concat(default_string);
-    // document.title = title_string;
     document.title = default_string;
   }
 };

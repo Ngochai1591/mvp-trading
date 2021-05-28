@@ -29,8 +29,6 @@
                   type="text"
                   class="input"
                   placeholder="What are you looking for?"
-                  :value="searchWord"
-                  @input="setSearchWord"
                 />
               </div>
 
@@ -46,21 +44,11 @@
           </div>
         </div>
         <div class="navbar-end">
-          <div v-for="category in categories" :key="category.id">
-            <router-link :to="category.get_absolute_url" class="navbar-item">{{
-              category.name
-            }}</router-link>
-            <!-- <router-link to="/category/summer" class="navbar-item">Summer</router-link>
-          <router-link to="/category/winter" class="navbar-item">Winter</router-link> -->
-          </div>
           <div class="navbar-item">
             <div class="buttons">
               <router-link to="/connectWallet" class="button is-light">{{this.getWalletID()}}</router-link>
 
-              <router-link to="/cart/" class="button is-success">
-                <span class="icon"><i class="fas fa-shopping-cart"></i></span>
-                <span>Cart {{ cartTotalLength }}</span>
-              </router-link>
+              
             </div>
           </div>
         </div>
@@ -90,7 +78,7 @@
   </div>
 </template>
 <script>
-import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
+import { mapState, mapGetters} from "vuex";
 import router from "./router";
 
 export default {
@@ -100,12 +88,8 @@ export default {
     };
   },
   created() {
-    this.initializeCart();
-    this.getCategories();
-    console.log("DONE");
   },
   computed: {
-    ...mapState("category", ["categories"]),
     ...mapGetters("authentication", [
       'isConnected'
     ]),
@@ -113,22 +97,9 @@ export default {
     ...mapState("authentication", [
       "walletID"
     ]),
-    ...mapState("cart", ["cart", "cartTotalLength"]),
-    ...mapState("product", ["searchWord"])
   },
   methods: {
-    ...mapActions("cart", ["initializeCart"]),
-    ...mapActions("product", ["search"]),
-    ...mapActions("category", ["getCategories"]),
-    ...mapMutations("product", ["setSearchWord"]),
-    searchItem() {
-      this.search();
-      if (this.$route.name !== "Search") {
-        router.push({ name: "Search" });
-      }
-    },
     moveToCreateProduct(){
-      console.log("YOYOYOYOYO")
       router.push('/createProduct')
     },
     getWalletID(){
