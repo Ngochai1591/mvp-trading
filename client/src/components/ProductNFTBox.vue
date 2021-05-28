@@ -37,9 +37,13 @@ export default {
                 "setCurrentProduct"
             ]),
             getVideoID(video_link){
+              console.log("VIDEO_LINK", video_link)
+              if(video_link){
                 const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
                 const match = video_link.match(regExp);
                 return (match && match[7].length === 11) ? match[7] : false;
+              }
+              return null
             },
             getThumbnail(url){
                 const video_id = this.getVideoID(url)

@@ -4,7 +4,10 @@
       <div class="navbar-brand">
         <router-link to="/" class="navbar-item">
           <!-- <strong>MVP trading</strong> -->
-          <img src="https://lh5.googleusercontent.com/Ja0yCw81LMzaCw8JcfKt6i8QnEYr0r9y1ZwSjr3kwHGIvhpVSia-usYXEB4B0NpwxsXAoZmyaEdFjLO3evyH1DyfTebRNoyeTwYL2K_OFNbCcqFO398SzYbiPA_kFJ3VcLit2G4QzJ4"/>
+          <!-- <img src="<%= BASE_URL %>mvp.ico"/> -->
+
+          <img src="https://i.ibb.co/FDjHsm8/photo-2021-05-28-23-10-40.jpg"/>
+          <img class="ml-3 mb-2" src="https://lh5.googleusercontent.com/Ja0yCw81LMzaCw8JcfKt6i8QnEYr0r9y1ZwSjr3kwHGIvhpVSia-usYXEB4B0NpwxsXAoZmyaEdFjLO3evyH1DyfTebRNoyeTwYL2K_OFNbCcqFO398SzYbiPA_kFJ3VcLit2G4QzJ4"/>
         </router-link>
 
         <a
@@ -29,8 +32,6 @@
                   type="text"
                   class="input"
                   placeholder="What are you looking for?"
-                  :value="searchWord"
-                  @input="setSearchWord"
                 />
               </div>
 
@@ -46,21 +47,11 @@
           </div>
         </div>
         <div class="navbar-end">
-          <div v-for="category in categories" :key="category.id">
-            <router-link :to="category.get_absolute_url" class="navbar-item">{{
-              category.name
-            }}</router-link>
-            <!-- <router-link to="/category/summer" class="navbar-item">Summer</router-link>
-          <router-link to="/category/winter" class="navbar-item">Winter</router-link> -->
-          </div>
           <div class="navbar-item">
             <div class="buttons">
               <router-link to="/connectWallet" class="button is-light">{{this.getWalletID()}}</router-link>
 
-              <router-link to="/cart/" class="button is-success">
-                <span class="icon"><i class="fas fa-shopping-cart"></i></span>
-                <span>Cart {{ cartTotalLength }}</span>
-              </router-link>
+              
             </div>
           </div>
         </div>
@@ -73,7 +64,7 @@
     <section class="section">
       <router-view />
     </section>
-    <div class="create-product" @click="moveToCreateProduct()">
+    <div :class="showCreateButton()" @click="moveToCreateProduct()">
       <div class="create">
         <div class="block1">
         <i class="fas fa-plus-circle fa-3x"></i>
@@ -90,8 +81,9 @@
   </div>
 </template>
 <script>
-import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
+import { mapState, mapGetters} from "vuex";
 import router from "./router";
+
 
 export default {
   data() {
@@ -99,44 +91,35 @@ export default {
       showMobileMenu: false
     };
   },
-  created() {
-    this.initializeCart();
-    this.getCategories();
-    console.log("DONE");
-  },
+ 
   computed: {
-    ...mapState("category", ["categories"]),
     ...mapGetters("authentication", [
-      'isConnected'
+      'isConnected',
     ]),
     ...mapState("loading", ["isLoading"]),
     ...mapState("authentication", [
-      "walletID"
+      "walletID",
+      'walletError'
     ]),
-    ...mapState("cart", ["cart", "cartTotalLength"]),
-    ...mapState("product", ["searchWord"])
   },
   methods: {
-    ...mapActions("cart", ["initializeCart"]),
-    ...mapActions("product", ["search"]),
-    ...mapActions("category", ["getCategories"]),
-    ...mapMutations("product", ["setSearchWord"]),
-    searchItem() {
-      this.search();
-      if (this.$route.name !== "Search") {
-        router.push({ name: "Search" });
-      }
-    },
     moveToCreateProduct(){
-      console.log("YOYOYOYOYO")
       router.push('/createProduct')
     },
     getWalletID(){
       console.log("WALLET_STATUS", this.isConnected)
       if(this.isConnected){
-        return this.walletID
+        // return this.walletID
+        return "Wallet is connected"
       }
       return "Connect to wallet"
+    },
+    showCreateButton(){
+      console.log(router.currentRoute.fullPath)
+      if(router.currentRoute.fullPath === "/createProduct"){
+        return "is-hidden"
+      }
+      return "create-product"
     }
   }
 };
@@ -209,4 +192,8 @@ export default {
 .create-product:hover{
       cursor: pointer;
     }
+
+.is-hidden{
+  display: none;
+}
 </style>

@@ -14,7 +14,7 @@
                       type="text"
                       placeholder="e.g. https://youtube.com"
                       class="input"
-                      :value="url"
+                      :value="product.url"
                       @input="setUrl"
                       required
                     />
@@ -32,7 +32,7 @@
                       placeholder="e.g name of video" 
                       class="input" 
                       required
-                      :value="name"
+                      :value="product.name"
                       @input="setName" />
                     <span class="icon is-small is-left">
                       <i class="fas fa-signature"></i>
@@ -48,7 +48,7 @@
                       placeholder="e.g Faker, Khan, Show Maker"
                       class="input"
                       required
-                      :value="players"
+                      :value="product.players"
                       @input="setPlayers"
                     />
                     <span class="icon is-small is-left">
@@ -65,7 +65,7 @@
                       placeholder="e.g Yasuo, Nidalee, Miss Fortune..."
                       class="input"
                       required
-                      :value="champions"
+                      :value="product.champions"
                       @input="setChampions"
                     />
                     <span class="icon is-small is-left">
@@ -82,7 +82,7 @@
                       placeholder="e.g MSI 2019" 
                       class="input" 
                       required
-                      :value="tournaments"
+                      :value="product.tournaments"
                       @input="setTournaments" />
                     <span class="icon is-small is-left">
                       <i class="fas fa-chess"></i>
@@ -99,7 +99,7 @@
                       class="input" 
                       required
                       @input="setPopularScore"
-                      :value="popularScore" />
+                      :value="product.popularScore" />
                     <span class="icon is-small is-left">
                       <i class="fas fa-fire-alt"></i>
                     </span>
@@ -114,7 +114,7 @@
                       placeholder="e.g penta kills, backdoor, 1 vs 2, Solo Q"
                       class="input"
                       required
-                      :value="keyWords"
+                      :value="product.keyWords"
                       @input="setKeyWords"
                     />
                     <span class="icon is-small is-left">
@@ -132,7 +132,7 @@
                       class="input" 
                       required 
                       @input="setLocations"
-                      :value="locations"/>
+                      :value="product.locations"/>
                     <span class="icon is-small is-left">
                       <i class="fas fa-compass"></i>
                     </span>
@@ -148,7 +148,7 @@
                       class="input" 
                       required
                       @input="setTeams"
-                      :value="teams" />
+                      :value="product.teams" />
                     <span class="icon is-small is-left">
                       <i class="fab fa-teamspeak"></i>
                     </span>
@@ -165,7 +165,7 @@
                       class="input" 
                       required
                       @input="setPrice"
-                      :value="price" />
+                      :value="product.price" />
                     <span class="icon is-small is-left">
                       <i class="fas fa-dollar-sign"></i>
                     </span>
@@ -174,7 +174,7 @@
 
                 <div class="field is-grouped is-grouped-right">
                   <p class="control">
-                    <a class="button is-primary" @click="createProduct()">
+                    <a class="button is-primary" @click="creating()">
                       Submit
                     </a>
                   </p>
@@ -194,20 +194,12 @@
 </template>
 <script>
 import {mapState, mapMutations, mapActions} from 'vuex';
+import {toast} from 'bulma-toast'
 
 export default {
   computed:{
     ...mapState('product_nft',[
-       "url",
-       "name",
-       "players",
-       "champions",
-       "tournaments",
-       "popularScore",
-       "keyWords",
-       "locations",
-       "teams",
-       "price"
+      "product"
     ]),
 
   },
@@ -226,7 +218,39 @@ export default {
         "setLocations",
         "setTeams",
         "setPrice",
-    ])
+    ]),
+    async creating(){
+      await this.createProduct()
+       let toast_message = null
+     const error = this.$store.state.product_nft.error
+      const success = this.$store.state.product_nft.success
+
+    console.log(error)
+    console.log(success)
+    if (error) {
+      toast_message = {
+        message: error,
+        type: "is-danger",
+        dismissible: true,
+        pauseOnHover: true,
+        duration: 2000,
+        position: "bottom-right"
+      };
+    }
+
+    if (success) {
+      toast_message = {
+        message: success,
+        type: "is-success",
+        dismissible: true,
+        pauseOnHover: true,
+        duration: 2000,
+        position: "bottom-right"
+      };
+    }
+
+    toast(toast_message)
+    }
   }
 };
 </script>
