@@ -86,12 +86,6 @@ const Contract = require("web3-eth-contract");
 const PROVIDER = "https://data-seed-prebsc-2-s2.binance.org:8545"
 const NFT_SMARTCONTRACT_ADDRESS = "0x780F4bE29E4a995EF020556b67A079D24Ee85bE5"
 const GAS_PRICE = "1000000000"
-// const CHUONG_PRIVATE_KEY = "26d3ee767995bd347584278bb88a9b8fd5dc7a58cc239b36db28e168ccb72292";
-// const HOAN_PRIVATE_KEY = "b8dbba400a7620fd72675763ce8423d9c966786fb9fddbe0cd81982cdd63a694";
-// const metadata_link = 'https://ipfs.io/ipfs/Qmd9MCGtdVz2miNumBHDbvj8bigSgTwnr4SbyH6DNnpWdt?filename=0-PUG.json';
-// const BSC_TESTNET_ADDRESS = 'https://data-seed-prebsc-1-s1.binance.org:8545'
-// const HOAN_ADDRESS = '0xc24BC060a2305E35641c4A67F0Ee4aD932b2E083'
-
 
 async function totalSupply(provider, minABI, contract_id) {
   Contract.setProvider(provider);
