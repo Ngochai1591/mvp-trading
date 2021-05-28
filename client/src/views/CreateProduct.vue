@@ -174,7 +174,7 @@
 
                 <div class="field is-grouped is-grouped-right">
                   <p class="control">
-                    <a class="button is-primary" @click="createProduct()">
+                    <a class="button is-primary" @click="creating()">
                       Submit
                     </a>
                   </p>
@@ -194,6 +194,7 @@
 </template>
 <script>
 import {mapState, mapMutations, mapActions} from 'vuex';
+import {toast} from 'bulma-toast'
 
 export default {
   computed:{
@@ -217,7 +218,39 @@ export default {
         "setLocations",
         "setTeams",
         "setPrice",
-    ])
+    ]),
+    async creating(){
+      await this.createProduct()
+       let toast_message = null
+     const error = this.$store.state.product_nft.error
+      const success = this.$store.state.product_nft.success
+
+    console.log(error)
+    console.log(success)
+    if (error) {
+      toast_message = {
+        message: error,
+        type: "is-danger",
+        dismissible: true,
+        pauseOnHover: true,
+        duration: 2000,
+        position: "bottom-right"
+      };
+    }
+
+    if (success) {
+      toast_message = {
+        message: success,
+        type: "is-success",
+        dismissible: true,
+        pauseOnHover: true,
+        duration: 2000,
+        position: "bottom-right"
+      };
+    }
+
+    toast(toast_message)
+    }
   }
 };
 </script>

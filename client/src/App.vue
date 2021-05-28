@@ -4,7 +4,10 @@
       <div class="navbar-brand">
         <router-link to="/" class="navbar-item">
           <!-- <strong>MVP trading</strong> -->
-          <img src="https://lh5.googleusercontent.com/Ja0yCw81LMzaCw8JcfKt6i8QnEYr0r9y1ZwSjr3kwHGIvhpVSia-usYXEB4B0NpwxsXAoZmyaEdFjLO3evyH1DyfTebRNoyeTwYL2K_OFNbCcqFO398SzYbiPA_kFJ3VcLit2G4QzJ4"/>
+          <!-- <img src="<%= BASE_URL %>mvp.ico"/> -->
+
+          <img src="https://i.ibb.co/FDjHsm8/photo-2021-05-28-23-10-40.jpg"/>
+          <img class="ml-3 mb-2" src="https://lh5.googleusercontent.com/Ja0yCw81LMzaCw8JcfKt6i8QnEYr0r9y1ZwSjr3kwHGIvhpVSia-usYXEB4B0NpwxsXAoZmyaEdFjLO3evyH1DyfTebRNoyeTwYL2K_OFNbCcqFO398SzYbiPA_kFJ3VcLit2G4QzJ4"/>
         </router-link>
 
         <a

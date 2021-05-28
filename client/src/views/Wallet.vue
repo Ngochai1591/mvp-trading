@@ -42,8 +42,9 @@ export default {
         position: "bottom-right",
       };
 
-      router.push('/')
     }
+    router.push('/')
+
 
     toast(toast_message);
   },
